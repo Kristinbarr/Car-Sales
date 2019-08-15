@@ -1,4 +1,3 @@
-
 const initialState = {
   additionalPrice: 0,
   car: {
@@ -21,22 +20,29 @@ export const reducer = (state = initialState, action) => {
     case 'ADD_FEATURE':
       return {
         ...state,
-        additionalPrice: state.additionalPrice += action.payload.price,
-        car: { ...state.car, features: [...state.car.features, action.payload]}
+        additionalPrice: (state.additionalPrice += action.payload.price),
+        car: {
+          ...state.car,
+          features: [...state.car.features, action.payload]
+        },
+        store: state.store.filter((feature) => feature.id !== action.payload.id)
       }
-      break;
+      break
     case 'REMOVE_ADDED_FEATURE':
       return {
         ...state,
         additionalPrice: (state.additionalPrice -= action.payload.price),
         car: {
           ...state.car,
-          features: state.car.features.filter((feature) => feature.id !== action.payload.id)
-        }
+          features: state.car.features.filter(
+            (feature) => feature.id !== action.payload.id
+          )
+        },
+        store: [...state.store, action.payload]
       }
-      break;
+      break
     default:
       return state
-      break;
+      break
   }
 }
