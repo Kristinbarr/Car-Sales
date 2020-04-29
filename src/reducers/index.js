@@ -27,7 +27,6 @@ export const reducer = (state = initialState, action) => {
         },
         store: state.store.filter((feature) => feature.id !== action.payload.id)
       }
-      break
     case 'REMOVE_ADDED_FEATURE':
       return {
         ...state,
@@ -40,9 +39,7 @@ export const reducer = (state = initialState, action) => {
         },
         store: [...state.store, action.payload]
       }
-      break
     default:
       return state
-      break
   }
 }
