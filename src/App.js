@@ -5,15 +5,14 @@ import AddedFeatures from './components/AddedFeatures'
 import AdditionalFeatures from './components/AdditionalFeatures'
 import Total from './components/Total'
 
-const App = (props) => {
-
+const App = () => {
   return (
-    <div className='boxes'>
-      <div className='box'>
+    <div className='section boxes columns'>
+      <div className='is-three-fifths column'>
         <Header />
         <AddedFeatures />
       </div>
-      <div className='box'>
+      <div className='box is-two-fifths column'>
         <AdditionalFeatures />
         <Total />
       </div>
