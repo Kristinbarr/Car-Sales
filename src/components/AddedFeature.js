@@ -1,16 +1,20 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { removeAddedFeature } from '../actions'
+const AddedFeature = props => {
+  // useDispatch pulls in dispatch to have actions straight in the component
+  // tradeoff is that actions are not organized in one file
+  const dispatch = useDispatch()
 
-const AddedFeature = (props) => {
   return (
-    <div className='card'>
-      <div className='card-content'>
+    <div className="card">
+      <div className="card-content">
         <span>{props.feature.name}</span>&nbsp;&nbsp;
         <button
-          onClick={() => props.removeAddedFeature(props.feature)}
-          className='delete'
+          onClick={() =>
+            dispatch({ type: 'REMOVE_FEATURE', payload: props.feature })
+          }
+          className="delete"
         >
           X
         </button>
@@ -19,13 +23,4 @@ const AddedFeature = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    car: state.car
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  { removeAddedFeature }
-)(AddedFeature)
+export default AddedFeature

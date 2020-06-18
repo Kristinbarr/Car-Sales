@@ -1,22 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { addFeature } from '../actions'
+const AdditionalFeature = props => {
+  // useDispatch pulls in dispatch to have actions straight in the component
+  // tradeoff is that actions are not organized in one file
+  const dispatch = useDispatch()
 
-const AdditionalFeature = (props) => {
-  console.log('add feature', props)
   return (
-    <div className='card'>
-      <div className='card-content'>
+    <div className="card">
+      <div className="card-content">
         <span>
           {props.feature.name} (${props.feature.price})
         </span>
         &nbsp;&nbsp;
         <button
-          onClick={() => {
-            props.addFeature(props.feature)
-          }}
-          className='button is-warning is-offset-6'
+          onClick={() => dispatch({ type: 'ADD-FEATURE', payload: props.feature })}
+          className="button is-warning is-offset-6"
         >
           Add
         </button>
@@ -25,14 +24,4 @@ const AdditionalFeature = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    store: state.store,
-    car: state.car
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  { addFeature }
-)(AdditionalFeature)
+export default AdditionalFeature
